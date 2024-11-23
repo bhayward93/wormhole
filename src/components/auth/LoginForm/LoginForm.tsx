@@ -103,7 +103,7 @@ export function LoginForm() {
             Register
           </Button>
         )}
-        {error instanceof Error && <p className="text-red-500">{error.message}</p>}
+        {error instanceof Error && <p className="text-red-500" data-testid="login-form-error-message">{error.message}</p>}
       </CardFooter>
       {token && (
         <TokenAlert token={token} onContinue={handleTokenAlertContinue} />

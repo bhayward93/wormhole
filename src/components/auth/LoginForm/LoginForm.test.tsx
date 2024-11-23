@@ -1,29 +1,27 @@
 import { it, expect, describe, vi } from "vitest";
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { LoginForm } from './LoginForm';
+import { QueryClient, QueryClientProvider } from "react-query";
 import { FactionNameEnum } from "../../../types/factionEnum";
+
+const queryClient = new QueryClient()
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+)
 
 vi.mock("react-router-dom", () => ({
   useNavigate: vi.fn(),
 }));
 
-vi.mock("../../../hooks/useRegister", () => ({
-  useRegister: vi.fn(() => ({
-    register: vi.fn(),
-    inProgress: false,
-    error: null,
-  })),
-}));
-
 describe('LoginForm', () => {
   it('should render', () => {
-    render(<LoginForm />);
+    render(<Wrapper><LoginForm /></Wrapper>);
     expect(screen.getByText('Get started')).toBeInTheDocument();
   });
 
   describe('Input validation', () => {
     it('should validate symbol input', () => { 
-      render(<LoginForm />);
+      render(<Wrapper><LoginForm /></Wrapper>);
 
       const symbolInput = screen.getByTestId('text-form-group-input-symbol');
       fireEvent.change(symbolInput, { target: { value: 'ab' } });
@@ -33,7 +31,7 @@ describe('LoginForm', () => {
     });
 
     it('should validate faction input', () => {
-      render(<LoginForm />);
+      render(<Wrapper><LoginForm /></Wrapper>);
 
       const factionInput = screen.getByTestId('text-form-group-input-faction');
 
@@ -46,7 +44,7 @@ describe('LoginForm', () => {
 
   describe('Register', () => {
     it('should enable register button when form is valid', () => {
-      render(<LoginForm />);
+      render(<Wrapper><LoginForm /></Wrapper>);
 
       const symbolInput = screen.getByTestId('text-form-group-input-symbol');
       const factionInput = screen.getByTestId('text-form-group-input-faction');
@@ -57,18 +55,58 @@ describe('LoginForm', () => {
       expect(screen.getByTestId('register-button')).not.toBeDisabled();
     });
 
-    it('should display error message when registration hook has an error', () => {
-      vi.mock("../../../hooks/useRegister", () => ({
-        useRegister: vi.fn(() => ({
-          register: vi.fn(),
-          inProgress: false,
-          error: 'Error message',
+    it('should call to register the user', async() => {
+      const fetchMockFn = vi.fn(() => Promise.resolve({
+        ok: true,
+        json: vi.fn(() => Promise.resolve({
+          data: {
+            data: {
+              token: "mockToken",
+            },
+          },
         })),
       }));
+      vi.stubGlobal('fetch', fetchMockFn);
 
-      render(<LoginForm />);
+      render(<Wrapper><LoginForm /></Wrapper>);
 
-      expect(screen.getByText('Error message')).toBeInTheDocument();
+      const symbolInput = screen.getByTestId('text-form-group-input-symbol');
+      const factionInput = screen.getByTestId('text-form-group-input-faction');
+
+      await act(() => {
+        fireEvent.change(symbolInput, { target: { value: 'ValidSymbol' } });
+        fireEvent.change(factionInput, { target: { value: FactionNameEnum.ANCIENTS } });
+        fireEvent.click(screen.getByTestId('register-button'));
+      });
+
+      expect(fetchMockFn).toHaveBeenCalled();
+      expect(screen.queryByTestId('login-form-error-message')).not.toBeInTheDocument();
+    });
+
+    it('should display error message when registration hook has an error', async () => {
+      const fetchMockFn = vi.fn(() => Promise.resolve({
+        ok: false,
+        json: vi.fn(() => Promise.resolve({
+          error: {
+            message: "Error message",
+          },
+        })),
+      }));
+      vi.stubGlobal('fetch', fetchMockFn);
+
+      render(<Wrapper><LoginForm /></Wrapper>);
+
+      const symbolInput = screen.getByTestId('text-form-group-input-symbol');
+      const factionInput = screen.getByTestId('text-form-group-input-faction');
+
+      await act(() => {
+        fireEvent.change(symbolInput, { target: { value: 'ValidSymbol' } });
+        fireEvent.change(factionInput, { target: { value: FactionNameEnum.ANCIENTS } });
+        fireEvent.click(screen.getByTestId('register-button'));
+      });
+
+      expect(fetchMockFn).toHaveBeenCalled();
+      expect(screen.getByTestId('login-form-error-message')).toHaveTextContent('Error message');
     });
   });
 });
