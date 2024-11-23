@@ -68,7 +68,7 @@ export type ShipRegistration = {
 export type ShipCargo = {
   capacity: number;
   units: number;
-  inventory: any[]; // Can be made more specific if needed
+  inventory: unknown[];
 };
 
 export type ShipFrame = {
