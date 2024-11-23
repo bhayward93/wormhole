@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { CardContent, CardFooter, CardHeader } from "../../ui/card";
 import { useNavigate } from "react-router-dom";
-import { useRegister } from "../../../hooks/useRegister";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { TextFormGroup } from "../../common/TextFormGroup/TextFormGroup";
 import { validateSymbol } from "../../../helpers/validators/symbolValidator";
@@ -9,6 +8,9 @@ import { validateFaction } from "../../../helpers/validators/factionValidator";
 import { LoadingSpinner } from "../../common/LoadingSpinner/LoadingSpinner";
 import { Button } from "../../ui/button";
 import { TokenAlert } from "../TokenAlert/TokenAlert";
+import { useMutation } from "react-query";
+import { register } from "../../../services/registerService";
+import { RegisterResponse } from "../../../types/gameTypes";
 
 /**
  * Login form component.
@@ -16,11 +18,11 @@ import { TokenAlert } from "../TokenAlert/TokenAlert";
  */
 export function LoginForm() {
   const navigate = useNavigate();
-  const { register, inProgress, error } = useRegister();
-	const { token } = useContext(AuthContext);
+	const { setToken, token } = useContext(AuthContext);
   const [ formData, setFormData ] = useState({ symbol: "", faction: "COSMIC" });
   const [ symbolValid, setSymbolValid ] = useState(false);
   const [ factionValid, setFactionValid ] = useState(true);
+  const { mutate, error, isLoading } = useMutation(register);
 
   /**
    * Handle form submission.
@@ -29,7 +31,14 @@ export function LoginForm() {
    */
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    register(formData.symbol, formData.faction);
+    mutate(
+      { symbol: formData.symbol, faction: formData.faction },
+      {
+        onSuccess: (response: RegisterResponse) => {
+          setToken(response.data.token);
+        }
+      }
+    );
   };
 
   /**
@@ -87,14 +96,14 @@ export function LoginForm() {
         />
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
-        {inProgress ? (
+        {isLoading ? (
           <LoadingSpinner />
         ) : (
           <Button type="submit" className="w-full" disabled={!isFormValid} data-testid="register-button">
             Register
           </Button>
         )}
-        {error && <p className="text-red-500">{error}</p>}
+        {error instanceof Error && <p className="text-red-500">{error.message}</p>}
       </CardFooter>
       {token && (
         <TokenAlert token={token} onContinue={handleTokenAlertContinue} />

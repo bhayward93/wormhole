@@ -5,6 +5,7 @@ import './index.css'
 import { App } from './App.tsx'
 import { AuthPage } from './pages/AuthPage/AuthPage';
 import { AuthProvider } from './context/auth/AuthProvider';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const router = createBrowserRouter([
   {
@@ -27,10 +28,14 @@ const router = createBrowserRouter([
   },
 ])
 
+const queryClient: QueryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}/>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}/>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
