@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  min-height: 100vh;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --background: 240 30% 5%;
+  --foreground: 210 70% 90%;
+  --card: 235 35% 10%;
+  --card-foreground: 210 70% 90%;
+  --popover: 235 35% 10%;
+  --popover-foreground: 210 70% 90%;
+  --primary: 180 70% 40%;
+  --primary-foreground: 240 30% 5%;
+  --secondary: 270 50% 30%;
+  --secondary-foreground: 210 70% 90%;
+  --muted: 240 20% 20%;
+  --muted-foreground: 240 10% 60%;
+  --accent: 300 60% 40%;
+  --accent-foreground: 210 70% 90%;
+  --destructive: 0 70% 40%;
+  --destructive-foreground: 210 70% 90%;
+  --border: 240 20% 20%;
+  --input: 240 20% 20%;
+  --ring: 180 70% 40%;
+  --chart-1: 180 70% 40%;
+  --chart-2: 270 50% 30%;
+  --chart-3: 300 60% 40%;
+  --chart-4: 60 70% 40%;
+  --chart-5: 0 70% 40%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
