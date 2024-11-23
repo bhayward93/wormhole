@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { AuthContext } from "../context/auth/AuthContext";
 import { useContext } from "react";
 
@@ -17,7 +17,7 @@ export function useRegister() {
    * @param { string } faction - The faction of the user.
    * @returns { Promise<void> } void.
    */
-  const register = useCallback(async (symbol: string, faction: string): Promise<void> => {
+  const register = async (symbol: string, faction: string): Promise<void> => {
     setInProgress(true);
     setError("");
 
@@ -47,7 +47,7 @@ export function useRegister() {
     } finally {
       setInProgress(false);
     }
-  }, [setToken, setData]);
+  };
 
   return {
     register,

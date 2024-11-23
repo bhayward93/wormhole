@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 
@@ -24,7 +24,7 @@ export function TextFormGroup({ label, name, value, onChange, validateFn }: Form
    * @param { React.ChangeEvent<HTMLInputElement> } e - The change event.
    * @returns { void }
    */
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue: string = e.currentTarget.value;
     let isValid = true;
 
@@ -41,7 +41,7 @@ export function TextFormGroup({ label, name, value, onChange, validateFn }: Form
     }
 
     onChange(newValue, isValid);
-  }, [validateFn, onChange]);
+  };
 
   return (
     <div className="flex flex-col gap-2">

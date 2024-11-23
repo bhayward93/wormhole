@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 import { CardContent, CardFooter, CardHeader } from "../../ui/card";
 import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../../hooks/useRegister";
@@ -27,13 +27,10 @@ export function LoginForm() {
    * @param { React.FormEvent<HTMLFormElement> } e - The form event.
    * @returns { Promise<void> }
    */
-  const handleFormSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-      e.preventDefault();
-      register(formData.symbol, formData.faction);
-    },
-    [formData, register]
-  );
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    register(formData.symbol, formData.faction);
+  };
 
   /**
    * Handle symbol change.
@@ -41,13 +38,10 @@ export function LoginForm() {
    * @param { boolean } valid - Whether the symbol is valid.
    * @returns { void }
    */
-  const handleSymbolChange = useCallback(
-    (value: string, valid: boolean) => {
-      setFormData({ ...formData, symbol: value });
-      setSymbolValid(valid);
-    },
-    [formData, setFormData]
-  );
+  const handleSymbolChange = (value: string, valid: boolean) => {
+    setFormData({ ...formData, symbol: value });
+    setSymbolValid(valid);
+  };
 
   /**
    * Handle faction change.
@@ -55,27 +49,21 @@ export function LoginForm() {
    * @param { boolean } valid - Whether the faction is valid.
    * @returns { void }
    */
-  const handleFactionChange = useCallback(
-    (value: string, valid: boolean) => {
-      setFormData({ ...formData, faction: value });
-      setFactionValid(valid);
-    },
-    [formData, setFormData]
-  );
+  const handleFactionChange = (value: string, valid: boolean) => {
+    setFormData({ ...formData, faction: value });
+    setFactionValid(valid);
+  };
 
   /**
    * Handle token alert continue button click.
    * @returns { void }
    */
-  const handleTokenAlertContinue = useCallback(() => {
+  const handleTokenAlertContinue = () => {
     navigate("/dashboard");
-  }, [navigate]);
+  };
 
 	/** Whether the form is valid. */
-	const isFormValid = useMemo(
-    () => symbolValid && factionValid,
-    [symbolValid, factionValid]
-  );
+	const isFormValid = symbolValid && factionValid;
 
   return (
     <form onSubmit={handleFormSubmit} className="w-full p-8">
