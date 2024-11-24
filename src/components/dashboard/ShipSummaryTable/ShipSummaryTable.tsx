@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GameStateContext } from '../../../context/gameState/GameStateContext';
+import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table';
 import { Ship } from '../../../types/game-types';
 

@@ -10,7 +10,7 @@ import { Button } from "../../ui/button";
 import { TokenAlert } from "../TokenAlert/TokenAlert";
 import { useMutation } from "react-query";
 import { register, RegisterResponse } from "../../../services/register-service";
-import { GameStateContext } from "../../../context/gameState/GameStateContext";
+import { GameStateContext } from "../../../context/game-state/GameStateContext";
 
 /**
  * Login form component.

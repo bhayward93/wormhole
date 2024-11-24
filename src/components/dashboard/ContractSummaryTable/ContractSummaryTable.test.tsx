@@ -1,7 +1,7 @@
 import { it, expect, describe } from "vitest";
 import { act, render, screen } from '@testing-library/react';
 import { ContractSummaryTable } from './ContractSummaryTable';
-import { GameStateContext } from '../../../context/gameState/GameStateContext';
+import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
 
 describe('ContractSummaryTable', () => {

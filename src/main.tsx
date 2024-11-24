@@ -7,7 +7,7 @@ import { AuthPage } from './pages/AuthPage/AuthPage';
 import { AuthProvider } from './context/auth/AuthProvider';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { DashboardPage } from './pages/DashboardPage/DashboardPage.tsx';
-import { GameStateProvider } from './context/gameState/GameStateProvider.tsx';
+import { GameStateProvider } from './context/game-state/GameStateProvider.tsx';
 
 const router = createBrowserRouter([
   {

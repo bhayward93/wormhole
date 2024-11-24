@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GameStateContext } from '../../../context/gameState/GameStateContext';
+import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../ui/accordion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../../ui/card';
