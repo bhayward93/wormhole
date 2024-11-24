@@ -12,8 +12,8 @@ export function TopNavigationBar(): JSX.Element {
             </NavLink>
             <ul className="flex flex-row w-full items-center gap-4">
                 <li>
-                    <NavLink to="/" className="group">
-                        <span className="group-[.active]:underline hover:underline">Home</span>
+                    <NavLink to="/dashboard" className="group">
+                        <span className="group-[.active]:underline hover:underline">Dashboard</span>
                     </NavLink>
                 </li>
                 <li>

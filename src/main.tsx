@@ -6,6 +6,8 @@ import { App } from './App.tsx'
 import { AuthPage } from './pages/AuthPage/AuthPage';
 import { AuthProvider } from './context/auth/AuthProvider';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { DashboardPage } from './pages/DashboardPage/DashboardPage.tsx';
+import { GameStateProvider } from './context/gameState/GameStateProvider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard',
-        element: <div>Dashboard</div>
+        element: <DashboardPage/>
       },
       {
         path: 'navigate',
@@ -34,7 +36,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router}/>
+        <GameStateProvider>
+          <RouterProvider router={router}/>
+        </GameStateProvider>
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>,

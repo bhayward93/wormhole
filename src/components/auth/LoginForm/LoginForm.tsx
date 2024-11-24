@@ -9,8 +9,8 @@ import { LoadingSpinner } from "../../common/LoadingSpinner/LoadingSpinner";
 import { Button } from "../../ui/button";
 import { TokenAlert } from "../TokenAlert/TokenAlert";
 import { useMutation } from "react-query";
-import { register } from "../../../services/registerService";
-import { RegisterResponse } from "../../../types/gameTypes";
+import { register, RegisterResponse } from "../../../services/registerService";
+import { GameStateContext } from "../../../context/gameState/GameStateContext";
 
 /**
  * Login form component.
@@ -19,6 +19,7 @@ import { RegisterResponse } from "../../../types/gameTypes";
 export function LoginForm() {
   const navigate = useNavigate();
 	const { setToken, token } = useContext(AuthContext);
+  const { initGameState } = useContext(GameStateContext);
   const [ formData, setFormData ] = useState({ symbol: "", faction: "COSMIC" });
   const [ symbolValid, setSymbolValid ] = useState(false);
   const [ factionValid, setFactionValid ] = useState(true);
@@ -36,6 +37,12 @@ export function LoginForm() {
       {
         onSuccess: (response: RegisterResponse) => {
           setToken(response.data.token);
+          initGameState({
+            ships: [response.data.ship],
+            contracts: [response.data.contract],
+            faction: response.data.faction,
+            agent: response.data.agent,
+          });
         }
       }
     );

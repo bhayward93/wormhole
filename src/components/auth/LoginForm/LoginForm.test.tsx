@@ -73,7 +73,7 @@ describe('LoginForm', () => {
       const symbolInput = screen.getByTestId('text-form-group-input-symbol');
       const factionInput = screen.getByTestId('text-form-group-input-faction');
 
-      await act(() => {
+      await act(async() => {
         fireEvent.change(symbolInput, { target: { value: 'ValidSymbol' } });
         fireEvent.change(factionInput, { target: { value: FactionNameEnum.ANCIENTS } });
         fireEvent.click(screen.getByTestId('register-button'));
@@ -99,7 +99,7 @@ describe('LoginForm', () => {
       const symbolInput = screen.getByTestId('text-form-group-input-symbol');
       const factionInput = screen.getByTestId('text-form-group-input-faction');
 
-      await act(() => {
+      await act(async () => {
         fireEvent.change(symbolInput, { target: { value: 'ValidSymbol' } });
         fireEvent.change(factionInput, { target: { value: FactionNameEnum.ANCIENTS } });
         fireEvent.click(screen.getByTestId('register-button'));

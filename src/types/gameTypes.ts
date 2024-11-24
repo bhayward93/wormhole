@@ -178,13 +178,3 @@ export type Faction = {
   traits: FactionTrait[];
   isRecruiting: boolean;
 };
-
-export type RegisterResponse = {
-  data: {
-    token: string;
-    agent: Agent;
-    contract: Contract;
-    faction: Faction;
-    ship: Ship;
-  };
-};

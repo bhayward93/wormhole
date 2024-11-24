@@ -12,7 +12,7 @@ describe('TopNavigationBar', () => {
     );
 
     expect(screen.getByText('Wormhole')).toBeInTheDocument();
-    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Navigate')).toBeInTheDocument();
   });
 
@@ -23,7 +23,7 @@ describe('TopNavigationBar', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/');
+    expect(screen.getByText('Dashboard').closest('a')).toHaveAttribute('href', '/dashboard');
     expect(screen.getByText('Navigate').closest('a')).toHaveAttribute('href', '/navigate');
   });
 });

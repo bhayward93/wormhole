@@ -1,4 +1,16 @@
-import { RegisterResponse } from "../types/gameTypes";
+import { Agent } from "http";
+import { Contract, Faction, Ship } from "../types/gameTypes";
+
+/** Register response. */
+export type RegisterResponse = {
+    data: {
+        token: string;
+        agent: Agent;
+        contract: Contract;
+        faction: Faction;
+        ship: Ship;
+    };
+};
 
 /** Params for the register request. */
 export type RegisterParams = {
