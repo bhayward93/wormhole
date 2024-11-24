@@ -3,13 +3,13 @@ import { CardContent, CardFooter, CardHeader } from "../../ui/card";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { TextFormGroup } from "../../common/TextFormGroup/TextFormGroup";
-import { validateSymbol } from "../../../helpers/validators/symbolValidator";
-import { validateFaction } from "../../../helpers/validators/factionValidator";
+import { validateSymbol } from "../../../helpers/validators/symbol-validator";
+import { validateFaction } from "../../../helpers/validators/faction-validator";
 import { LoadingSpinner } from "../../common/LoadingSpinner/LoadingSpinner";
 import { Button } from "../../ui/button";
 import { TokenAlert } from "../TokenAlert/TokenAlert";
 import { useMutation } from "react-query";
-import { register, RegisterResponse } from "../../../services/registerService";
+import { register, RegisterResponse } from "../../../services/register-service";
 import { GameStateContext } from "../../../context/gameState/GameStateContext";
 
 /**

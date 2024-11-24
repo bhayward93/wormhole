@@ -2,7 +2,7 @@ import { it, expect, describe } from "vitest";
 import { render, screen } from '@testing-library/react';
 import { ShipSummaryTable } from './ShipSummaryTable';
 import { GameStateContext } from '../../../context/gameState/GameStateContext';
-import { Ship, ShipNav } from '../../../types/gameTypes';
+import { Ship, ShipNav } from '../../../types/game-types';
 
 describe('ShipSummaryTable', () => {
   it('should render the table headers', () => {

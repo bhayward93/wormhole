@@ -2,7 +2,7 @@ import { it, expect, describe, vi } from "vitest";
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { LoginForm } from './LoginForm';
 import { QueryClient, QueryClientProvider } from "react-query";
-import { FactionNameEnum } from "../../../types/factionEnum";
+import { FactionNameEnum } from "../../../types/faction-enum";
 
 const queryClient = new QueryClient()
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

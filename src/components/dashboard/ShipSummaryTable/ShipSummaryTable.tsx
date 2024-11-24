@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { GameStateContext } from '../../../context/gameState/GameStateContext';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table';
-import { Ship } from '../../../types/gameTypes';
+import { Ship } from '../../../types/game-types';
 
 /**
  * Table that gives a summary of the logged in user's ships.

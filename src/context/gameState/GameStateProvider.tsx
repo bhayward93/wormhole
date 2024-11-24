@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import { GameState, GameStateContext } from "./GameStateContext";
-import { Contract, Faction, Ship } from "../../types/gameTypes";
+import { Contract, Faction, Ship } from "../../types/game-types";
 import { Agent } from "http";
 
 /** Props for the game state provider. */   

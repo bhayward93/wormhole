@@ -2,7 +2,7 @@ import { it, expect, describe } from "vitest";
 import { act, render, screen } from '@testing-library/react';
 import { ContractSummaryTable } from './ContractSummaryTable';
 import { GameStateContext } from '../../../context/gameState/GameStateContext';
-import { Contract } from '../../../types/gameTypes';
+import { Contract } from '../../../types/game-types';
 
 describe('ContractSummaryTable', () => {
   it('should render the table headers', () => {

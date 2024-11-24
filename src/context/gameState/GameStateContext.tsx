@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Contract, Faction, Ship } from "../../types/gameTypes";
+import { Contract, Faction, Ship } from "../../types/game-types";
 import { Agent } from "http";
 
 /** Game state. */
