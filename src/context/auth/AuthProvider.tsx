@@ -25,7 +25,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 		}, [token]);
 
     return (
-        <AuthContext.Provider value={{token, setToken}}>
+        <AuthContext.Provider value={{token, setToken, isAuthenticated: Boolean(token)}}>
             { children }
         </AuthContext.Provider>
     );
