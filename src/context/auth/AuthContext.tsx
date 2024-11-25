@@ -5,5 +5,5 @@ import { AuthContextType } from "../../types/auth-types";
 export const AuthContext = createContext<AuthContextType>({
     token: null,
     isAuthenticated: false,
-    setToken: (value: string|null) => void 0,
+    setToken: () => void 0,
 });
