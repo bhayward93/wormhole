@@ -47,7 +47,7 @@ export function TextFormGroup({ label, name, value, onChange, validateFn }: Form
     <div className="flex flex-col gap-2">
       <Label htmlFor={name} data-testid={`text-form-group-label-${name}`}>{label}</Label>
       <Input type="text" name={name} value={value} onChange={handleChange} data-testid={`text-form-group-input-${name}`} />
-      <div className="h-6">
+      <div className="min-h-6">
         {validationError && <p className="text-red-500" data-testid={`text-form-group-error-${name}`}>{validationError}</p>}
       </div>
     </div>
