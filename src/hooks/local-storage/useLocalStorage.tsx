@@ -33,7 +33,7 @@ export function useLocalStorage<T=unknown>(key: string, initialValue: T): UseLoc
 	 * @returns { void }
 	 */
   const setItem = useCallback((value: T): void => {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, value ? JSON.stringify(value) : "");
     setValue(value);
   }, [key]);
 
