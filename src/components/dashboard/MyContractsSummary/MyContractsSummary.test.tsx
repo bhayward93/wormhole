@@ -1,15 +1,20 @@
 import { it, expect, describe } from "vitest";
 import { act, render, screen } from '@testing-library/react';
-import { ContractSummaryTable } from './ContractSummaryTable';
+import { MyContractsSummary } from './MyContractsSummary';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 describe('ContractSummaryTable', () => {
   it('should render the table headers', () => {
     render(
-      <GameStateContext.Provider value={{ contracts: [] } as any}>
-        <ContractSummaryTable />
-      </GameStateContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <GameStateContext.Provider value={{ contracts: [] } as any}>
+          <MyContractsSummary />
+        </GameStateContext.Provider>
+      </QueryClientProvider>
     );
 
     expect(screen.getByText('Your Contracts')).toBeInTheDocument();
@@ -38,9 +43,11 @@ describe('ContractSummaryTable', () => {
     ];
 
     render(
-      <GameStateContext.Provider value={{ contracts: mockContracts } as any}>
-        <ContractSummaryTable />
-      </GameStateContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <GameStateContext.Provider value={{ contracts: mockContracts } as any}>
+          <MyContractsSummary />
+        </GameStateContext.Provider>
+      </QueryClientProvider>
     );
 
     expect(screen.getByText('contract1')).toBeInTheDocument();
@@ -68,5 +75,17 @@ describe('ContractSummaryTable', () => {
     expect(screen.getByText('Fulfilled')).toBeInTheDocument();
     expect(screen.getByText('Accepted')).toBeInTheDocument();
     expect(screen.getByText('deadline2')).toBeInTheDocument();
+  });
+
+  it("renders loading spinner when contracts are being fetched", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <GameStateContext.Provider value={{ isFetching: true } as any}>
+          <MyContractsSummary />
+        </GameStateContext.Provider>
+      </QueryClientProvider>
+    );
+
+    expect(screen.getByTestId("summary-card-refresh-icon")).toBeInTheDocument();
   });
 });

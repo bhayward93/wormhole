@@ -9,14 +9,14 @@ import { LoadingSpinner } from "../../common/LoadingSpinner/LoadingSpinner";
 import { Button } from "../../ui/button";
 import { TokenAlert } from "../TokenAlert/TokenAlert";
 import { useMutation } from "react-query";
-import { register, RegisterResponse } from "../../../services/register-service";
+import { register, RegisterResponse } from "../../../services/registration-service/registration-service";
 import { GameStateContext } from "../../../context/game-state/GameStateContext";
 
 /**
  * Login form component.
  * @returns { JSX.Element } - the login form component.
  */
-export function LoginForm() {
+export function LoginForm(): JSX.Element {
   const navigate = useNavigate();
 	const { setToken, token } = useContext(AuthContext);
   const { initGameState } = useContext(GameStateContext);

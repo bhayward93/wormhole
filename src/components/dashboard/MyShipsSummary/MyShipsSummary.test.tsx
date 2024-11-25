@@ -1,6 +1,6 @@
 import { it, expect, describe } from "vitest";
 import { render, screen } from '@testing-library/react';
-import { ShipSummaryTable } from './ShipSummaryTable';
+import { MyShipsSummary } from './MyShipsSummary';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Ship, ShipNav } from '../../../types/game-types';
 
@@ -8,7 +8,7 @@ describe('ShipSummaryTable', () => {
   it('should render the table headers', () => {
     render(
       <GameStateContext.Provider value={{ ships: [] } as any}>
-        <ShipSummaryTable />
+        <MyShipsSummary />
       </GameStateContext.Provider>
     );
 
@@ -41,7 +41,7 @@ describe('ShipSummaryTable', () => {
 
     render(
       <GameStateContext.Provider value={{ ships: mockShips } as any}>
-        <ShipSummaryTable />
+        <MyShipsSummary />
       </GameStateContext.Provider>
     );
 

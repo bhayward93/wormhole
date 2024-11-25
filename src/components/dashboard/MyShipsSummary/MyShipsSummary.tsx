@@ -7,7 +7,7 @@ import { Ship } from '../../../types/game-types';
  * Table that gives a summary of the logged in user's ships.
  * @returns { JSX.Element } Ship summary table.
  */
-export function ShipSummaryTable(): JSX.Element {
+export function MyShipsSummary(): JSX.Element {
   const { ships } = useContext(GameStateContext);
 
   return (
