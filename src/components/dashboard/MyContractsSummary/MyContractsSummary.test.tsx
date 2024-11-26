@@ -29,11 +29,23 @@ const mockContracts: Contract[] = [
   } as Contract,
 ];
 
+const mockGameStateContext: GameStateContextType = {
+  contracts: [],
+  setContracts: vi.fn(),
+  ships: [],
+  faction: null,
+  agent: null,
+  setShips: vi.fn(),
+  setFaction: vi.fn(),
+  setAgent: vi.fn(),
+  initGameState: vi.fn()
+};
+
 describe('ContractSummaryTable', () => {
   it('should render the table headers', () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ contracts: [] } as any}>
+        <GameStateContext.Provider value={{ ...mockGameStateContext, contracts: [] }}>
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -45,7 +57,7 @@ describe('ContractSummaryTable', () => {
   it('should render contract data', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ contracts: mockContracts } as any}>
+        <GameStateContext.Provider value={{ ...mockGameStateContext, contracts: mockContracts }}>
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -87,17 +99,7 @@ describe('ContractSummaryTable', () => {
     
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{
-          contracts: [],
-          setContracts: vi.fn(),
-          ships: [],
-          faction: null,
-          agent: null,
-          setShips: vi.fn(),
-          setFaction: vi.fn(),
-          setAgent: vi.fn(),
-          initGameState: vi.fn()
-        }}>
+        <GameStateContext.Provider value={mockGameStateContext}>
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>

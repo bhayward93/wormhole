@@ -83,7 +83,7 @@ describe('MyShipsSummary', () => {
 
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ships: [], setShips: vi.fn() } as any}>
+        <GameStateContext.Provider value={{ ...mockGameStateContext, ships: [] }}>
           <MyShipsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
