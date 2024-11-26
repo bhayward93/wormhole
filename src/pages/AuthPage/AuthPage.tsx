@@ -5,7 +5,7 @@ import { RegistrationForm } from '../../components/auth/RegistrationForm/Registr
  * Auth page component.
  * @returns { JSX.Element } The auth page component.
  */
-export function AuthPage() {
+export function AuthPage(): JSX.Element {
   return (
     <div className="flex flex-col items-center mt-20">
       <Card className="flex flex-row justify-center w-[500px] max-w-full">
