@@ -19,7 +19,10 @@ type TokenAlertProps = {
  * @param { TokenAlertProps } props - props.
  * @returns { JSX.Element } The token alert component.
  */
-export function TokenAlert({ token, onContinue }: TokenAlertProps) {
+export function TokenAlert({
+  token,
+  onContinue,
+}: TokenAlertProps): JSX.Element {
   return (
     <AlertDialog open={true}>
       <AlertDialogContent>
