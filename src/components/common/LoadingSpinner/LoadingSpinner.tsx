@@ -4,7 +4,6 @@ import { cn } from '../../../lib/utils';
 /** Loading spinner props type. */
 type LoadingSpinnerProps = {
   size?: number;
-  color?: string;
   className?: string;
 };
 
