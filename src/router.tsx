@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { UnauthenticatedOnlyRoute } from './components/routing/unauthenticated-only-route/unauthenticated-only-route';
 import { AuthPage } from './pages/AuthPage/AuthPage';
-import { AuthenticatedOnlyRoute } from './components/routing/autheticated-only-route/authenticated-only-route';
+import { AuthenticatedOnlyRoute } from './components/routing/authenticated-only-route/authenticated-only-route';
 import { DashboardPage } from './pages/DashboardPage/DashboardPage';
 
 /**
