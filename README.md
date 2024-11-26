@@ -4,7 +4,8 @@ Wormhole is an early-stage WIP client for SpaceTraders written in React. Basic f
 
 - [x] Registration.
 - [x] My ships list.
-- [x] My contracts list. 
+- [x] My contracts list.
+- [x] Contract acceptance.
 
 ## Requirements
 
