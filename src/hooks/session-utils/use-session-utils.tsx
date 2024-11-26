@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 
 /**
  * Session hook type. */
-type UseSessionReturnType = {
+type UseSessionUtilsReturnType = {
   logout: () => void;
 };
 
@@ -14,7 +14,7 @@ type UseSessionReturnType = {
  * Session utilities hook.
  * @returns { UseSessionReturnType }
  */
-export const useSessionUtils = (): UseSessionReturnType => {
+export const useSessionUtils = (): UseSessionUtilsReturnType => {
   const { setToken } = useContext(AuthContext);
   const { initGameState } = useContext(GameStateContext);
   const queryClient = useQueryClient();
