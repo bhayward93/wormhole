@@ -22,7 +22,7 @@ export function TextFormGroup({
   value,
   onChange,
   validateFn,
-}: FormGroupProps) {
+}: FormGroupProps): JSX.Element {
   const [validationError, setValidationError] = useState<string>('');
 
   /**
@@ -30,7 +30,7 @@ export function TextFormGroup({
    * @param { React.ChangeEvent<HTMLInputElement> } e - The change event.
    * @returns { void }
    */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValue: string = e.currentTarget.value;
     let isValid = true;
 
