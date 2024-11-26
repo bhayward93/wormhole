@@ -1,6 +1,6 @@
 import { it, expect, describe, vi, MockedFunction } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { LoginForm } from './LoginForm';
+import { RegistrationForm } from './RegistrationForm';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { FactionNameEnum } from '../../../types/faction-enum';
 import axios from 'axios';
@@ -21,11 +21,11 @@ vi.mock('react-router-dom', () => ({
   useNavigate: vi.fn(),
 }));
 
-describe('LoginForm', () => {
+describe('RegistrationForm', () => {
   it('should render', () => {
     render(
       <Wrapper>
-        <LoginForm />
+        <RegistrationForm />
       </Wrapper>
     );
     expect(screen.getByText('Get started')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('LoginForm', () => {
     it('should validate symbol input', () => {
       render(
         <Wrapper>
-          <LoginForm />
+          <RegistrationForm />
         </Wrapper>
       );
 
@@ -51,7 +51,7 @@ describe('LoginForm', () => {
     it('should validate faction input', () => {
       render(
         <Wrapper>
-          <LoginForm />
+          <RegistrationForm />
         </Wrapper>
       );
 
@@ -70,7 +70,7 @@ describe('LoginForm', () => {
     it('should enable register button when form is valid', () => {
       render(
         <Wrapper>
-          <LoginForm />
+          <RegistrationForm />
         </Wrapper>
       );
 
@@ -97,7 +97,7 @@ describe('LoginForm', () => {
 
       render(
         <Wrapper>
-          <LoginForm />
+          <RegistrationForm />
         </Wrapper>
       );
 
@@ -116,7 +116,7 @@ describe('LoginForm', () => {
 
       expect(axios.post).toHaveBeenCalled();
       expect(
-        screen.queryByTestId('login-form-error-message')
+        screen.queryByTestId('registration-form-error-message')
       ).not.toBeInTheDocument();
     });
 
@@ -134,7 +134,7 @@ describe('LoginForm', () => {
 
       render(
         <Wrapper>
-          <LoginForm />
+          <RegistrationForm />
         </Wrapper>
       );
 
@@ -152,9 +152,9 @@ describe('LoginForm', () => {
       });
 
       expect(axios.post).toHaveBeenCalled();
-      expect(screen.getByTestId('login-form-error-message')).toHaveTextContent(
-        'Error message'
-      );
+      expect(
+        screen.getByTestId('registration-form-error-message')
+      ).toHaveTextContent('Error message');
     });
   });
 });

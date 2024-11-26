@@ -3,15 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { AuthPage } from './AuthPage';
 
 vi.mock('./AuthPage', () => ({
-  AuthPage: vi.fn(() => <div data-testid="login-form" />),
+  AuthPage: vi.fn(() => <div data-testid="registration-form" />),
 }));
 
 describe('AuthPage', () => {
-  it('renders the login form', async () => {
+  it('renders the registration form', async () => {
     render(<AuthPage />);
 
-    const loginForm = screen.getByTestId('login-form');
+    const registrationForm = screen.getByTestId('registration-form');
 
-    expect(loginForm).toBeInTheDocument();
+    expect(registrationForm).toBeInTheDocument();
   });
 });

@@ -16,10 +16,10 @@ import {
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 
 /**
- * Login form component.
- * @returns { JSX.Element } - the login form component.
+ * Registration form component.
+ * @returns { JSX.Element } - the registration form component.
  */
-export function LoginForm(): JSX.Element {
+export function RegistrationForm(): JSX.Element {
   const navigate = useNavigate();
   const { setToken, token } = useContext(AuthContext);
   const { initGameState } = useContext(GameStateContext);
@@ -59,7 +59,7 @@ export function LoginForm(): JSX.Element {
    * @param { boolean } valid - Whether the symbol is valid.
    * @returns { void }
    */
-  const handleSymbolChange = (value: string, valid: boolean) => {
+  const handleSymbolChange = (value: string, valid: boolean): void => {
     setFormData({ ...formData, symbol: value });
     setSymbolValid(valid);
   };
@@ -70,7 +70,7 @@ export function LoginForm(): JSX.Element {
    * @param { boolean } valid - Whether the faction is valid.
    * @returns { void }
    */
-  const handleFactionChange = (value: string, valid: boolean) => {
+  const handleFactionChange = (value: string, valid: boolean): void => {
     setFormData({ ...formData, faction: value });
     setFactionValid(valid);
   };
@@ -79,7 +79,7 @@ export function LoginForm(): JSX.Element {
    * Handle token alert continue button click.
    * @returns { void }
    */
-  const handleTokenAlertContinue = () => {
+  const handleTokenAlertContinue = (): void => {
     navigate('/dashboard');
   };
 
@@ -121,7 +121,10 @@ export function LoginForm(): JSX.Element {
           </Button>
         )}
         {error instanceof Error && (
-          <p className="text-red-500" data-testid="login-form-error-message">
+          <p
+            className="text-red-500"
+            data-testid="registration-form-error-message"
+          >
             {error.message}
           </p>
         )}
