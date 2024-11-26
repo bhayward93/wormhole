@@ -35,7 +35,7 @@ export function ContractSummaryCard({
         </p>
         <p>
           <strong>Destination:</strong>{' '}
-          {contract.terms?.deliver?.[0]?.destinationSymbol}
+          {contract.terms?.deliver?.[0]?.destinationSymbol ?? 'N/A'}
         </p>
         <p>
           <strong>Expiration:</strong> {contract.expiration}
