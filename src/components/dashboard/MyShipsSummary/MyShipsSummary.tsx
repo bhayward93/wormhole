@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import {
   Table,
@@ -9,7 +9,10 @@ import {
   TableRow,
 } from '../../ui/table';
 import { Ship } from '../../../types/game-types';
-import { getMyShips } from '../../../services/ships-service/my-ships-service';
+import {
+  getMyShips,
+  GetMyShipsResponse,
+} from '../../../services/ships-service/my-ships-service';
 import { useQuery } from 'react-query';
 import { SummaryCardHeader } from '../SummaryCardHeader/SummaryCardHeader';
 import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
@@ -20,19 +23,15 @@ import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
  */
 export function MyShipsSummary(): JSX.Element {
   const { ships, setShips } = useContext(GameStateContext);
-  const { data, error, isFetching, refetch } = useQuery(
-    'getMyShips',
-    getMyShips,
-    { enabled: false }
-  );
-
-  useEffect(() => {
-    if (data?.data) {
+  const { error, isFetching, refetch } = useQuery('getMyShips', getMyShips, {
+    enabled: !ships?.length,
+    onSuccess: (data: GetMyShipsResponse): void => {
       setShips(data.data);
-    } else {
-      refetch();
-    }
-  }, [data, setShips, refetch]);
+    },
+    onError: (error: Error): void => {
+      console.error(error);
+    },
+  });
 
   const summaryCardHeader = useMemo(
     () => <SummaryCardHeader title="Your Ships" onRefresh={refetch} />,

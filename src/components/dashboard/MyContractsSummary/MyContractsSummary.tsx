@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
 import {
@@ -9,7 +9,10 @@ import {
 } from '../../ui/accordion';
 import { SummaryCardHeader } from '../SummaryCardHeader/SummaryCardHeader';
 import { useQuery } from 'react-query';
-import { getMyContracts } from '../../../services/contracts-service/contracts-service';
+import {
+  getMyContracts,
+  GetMyContractsResponse,
+} from '../../../services/contracts-service/contracts-service';
 import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
 import { ContractSummaryCard } from './ContractSummaryCard/ContractSummaryCard';
 
@@ -19,21 +22,19 @@ import { ContractSummaryCard } from './ContractSummaryCard/ContractSummaryCard';
  */
 export function MyContractsSummary(): JSX.Element {
   const { contracts, setContracts } = useContext(GameStateContext);
-  const { data, error, isFetching, refetch } = useQuery(
+  const { error, isFetching, refetch } = useQuery(
     'getMyContracts',
     getMyContracts,
     {
-      enabled: false,
+      enabled: !contracts?.length,
+      onSuccess: (data: GetMyContractsResponse): void => {
+        setContracts(data.data);
+      },
+      onError: (error: Error): void => {
+        console.error(error);
+      },
     }
   );
-
-  useEffect(() => {
-    if (data?.data) {
-      setContracts(data.data);
-    } else {
-      refetch();
-    }
-  }, [data, setContracts, refetch]);
 
   const summaryCardHeader = useMemo(
     () => <SummaryCardHeader title="Your Contracts" onRefresh={refetch} />,
