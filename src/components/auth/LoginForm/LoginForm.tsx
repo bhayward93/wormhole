@@ -18,7 +18,7 @@ import { GameStateContext } from "../../../context/game-state/GameStateContext";
  */
 export function LoginForm(): JSX.Element {
   const navigate = useNavigate();
-	const { setToken, token } = useContext(AuthContext);
+  const { setToken, token } = useContext(AuthContext);
   const { initGameState } = useContext(GameStateContext);
   const [ formData, setFormData ] = useState({ symbol: "", faction: "COSMIC" });
   const [ symbolValid, setSymbolValid ] = useState(false);
@@ -78,8 +78,8 @@ export function LoginForm(): JSX.Element {
     navigate("/dashboard");
   };
 
-	/** Whether the form is valid. */
-	const isFormValid = symbolValid && factionValid;
+  /** Whether the form is valid. */
+  const isFormValid = symbolValid && factionValid;
 
   return (
     <form onSubmit={handleFormSubmit} className="w-full p-8">

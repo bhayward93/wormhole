@@ -41,6 +41,6 @@ describe("register", () => {
         symbol: "testSymbol",
         faction: "testFaction",
       })
-	).rejects.toThrow(errorMessage);
+    ).rejects.toThrow(errorMessage);
   });
 });

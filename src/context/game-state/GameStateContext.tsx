@@ -21,13 +21,13 @@ export type GameStateContextType = GameState & {
 
 /** Game state context. */
 export const GameStateContext = createContext<GameStateContextType>({
-    ships: [],
-    setShips: () => void 0,
-    contracts: [],
-    setContracts: () => void 0,
-    faction: null,
-    setFaction: () => void 0,
-    agent: null,
-    setAgent: () => void 0,
-    initGameState: () => void 0,
+  ships: [],
+  setShips: () => void 0,
+  contracts: [],
+  setContracts: () => void 0,
+  faction: null,
+  setFaction: () => void 0,
+  agent: null,
+  setAgent: () => void 0,
+  initGameState: () => void 0,
 });

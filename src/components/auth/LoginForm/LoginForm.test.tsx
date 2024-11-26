@@ -65,13 +65,13 @@ describe('LoginForm', () => {
 
     it('should call to register the user', async () => {
       (axios.post as MockedFunction<typeof axios.post>).mockResolvedValue({
-          status: 200,
+        status: 200,
+        data: {
           data: {
-            data: {
-              token: "mockToken",
-            } 
-          },
-        }
+            token: "mockToken",
+          } 
+        },
+      }
       );
 
       render(<Wrapper><LoginForm /></Wrapper>);

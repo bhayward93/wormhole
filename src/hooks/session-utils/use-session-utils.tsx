@@ -15,22 +15,22 @@ type UseSessionReturnType = {
  * @returns { UseSessionReturnType }
  */
 export const useSessionUtils = (): UseSessionReturnType => {
-    const { setToken } = useContext(AuthContext);
-    const { initGameState } = useContext(GameStateContext);
-    const queryClient = useQueryClient();
-    const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
+  const { initGameState } = useContext(GameStateContext);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
-    const logout = () => {
-        initGameState({
-            ships: [],
-            contracts: [],
-            faction: null,
-            agent: null
-        });
-        setToken(null);
-        queryClient.removeQueries();
-        navigate("/");
-    };
+  const logout = () => {
+    initGameState({
+      ships: [],
+      contracts: [],
+      faction: null,
+      agent: null
+    });
+    setToken(null);
+    queryClient.removeQueries();
+    navigate("/");
+  };
 
-    return { logout };
+  return { logout };
 };

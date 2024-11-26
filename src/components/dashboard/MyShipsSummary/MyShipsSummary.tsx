@@ -58,14 +58,14 @@ export function MyShipsSummary(): JSX.Element {
           </TableRow>
         </TableHeader>
         <TableBody>
-            {ships.map((ship: Ship) => (
-              <TableRow key={ship.symbol}>
-                <TableCell className="text-medium">{ship.symbol}</TableCell>
-                <TableCell>{ship.nav.systemSymbol}</TableCell>
-                <TableCell>{ship.nav.waypointSymbol}</TableCell>
-                <TableCell>{ship.nav.status}</TableCell>
-              </TableRow>
-            ))}
+          {ships.map((ship: Ship) => (
+            <TableRow key={ship.symbol}>
+              <TableCell className="text-medium">{ship.symbol}</TableCell>
+              <TableCell>{ship.nav.systemSymbol}</TableCell>
+              <TableCell>{ship.nav.waypointSymbol}</TableCell>
+              <TableCell>{ship.nav.status}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </>

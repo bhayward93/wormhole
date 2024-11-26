@@ -7,6 +7,6 @@ import { LOCAL_STORAGE_AUTH_TOKEN_KEY } from "../../../consts/local-storage-keys
  * @returns { JSX.Element }
  */
 export function AuthenticatedOnlyRoute({ children }: { children: JSX.Element }): JSX.Element {
-	const isAuthenticated = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY);
-	return isAuthenticated ? children : <Navigate to="/" />;
+  const isAuthenticated = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY);
+  return isAuthenticated ? children : <Navigate to="/" />;
 }

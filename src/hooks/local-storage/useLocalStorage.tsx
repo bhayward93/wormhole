@@ -27,7 +27,7 @@ export function useLocalStorage<T=unknown>(key: string, initialValue: T): UseLoc
     }
   }, [key, initialValue]);
 
-	/**
+  /**
 	 * Set the local storage item.
 	 * @param { T } value - The value to set.
 	 * @returns { void }

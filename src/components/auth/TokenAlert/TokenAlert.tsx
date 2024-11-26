@@ -12,20 +12,20 @@ type TokenAlertProps = {
  * @returns { JSX.Element } The token alert component.
  */
 export function TokenAlert({ token, onContinue }: TokenAlertProps) {
-    return (
-      <AlertDialog open={true} >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Success!</AlertDialogTitle>
-            <AlertDialogTitle>Please save your access token</AlertDialogTitle>
-            <AlertDialogDescription>
-                <strong className="break-all">{token}</strong>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
-  }
+  return (
+    <AlertDialog open={true} >
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Success!</AlertDialogTitle>
+          <AlertDialogTitle>Please save your access token</AlertDialogTitle>
+          <AlertDialogDescription>
+            <strong className="break-all">{token}</strong>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}

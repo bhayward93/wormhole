@@ -9,20 +9,24 @@ import { QueryClient, QueryClientProvider } from "react-query";
 describe("useSessionUtils", () => {
   const setToken = vi.fn();
   const initGameState = vi.fn();
-	const queryClient: QueryClient = new QueryClient();
+  const queryClient = new QueryClient();
 
   const wrapper = ({ children }: { children: React.ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-			<AuthContext.Provider value={{ setToken, token: null, isAuthenticated: false }}>
-				<GameStateContext.Provider value={{ initGameState, ships: [], contracts: [], faction: null, agent: null, setShips: vi.fn(), setContracts: vi.fn(), setFaction: vi.fn(), setAgent: vi.fn() }}>
-					<MemoryRouter>{children}</MemoryRouter>
-				</GameStateContext.Provider>
-			</AuthContext.Provider>
-		</QueryClientProvider>
+      <AuthContext.Provider value={{ setToken, token: null, isAuthenticated: false }}>
+        <GameStateContext.Provider value={{ initGameState, ships: [], contracts: [], faction: null, agent: null, setShips: vi.fn(), setContracts: vi.fn(), setFaction: vi.fn(), setAgent: vi.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </GameStateContext.Provider>
+      </AuthContext.Provider>
+	  </QueryClientProvider>
   );
 
+  it("should be defined", () => {
+    expect(useSessionUtils).toBeDefined();
+  });
+
   it("should logout correctly", () => {
-		const { result } = renderHook(() => useSessionUtils(), { wrapper });
+    const { result } = renderHook(() => useSessionUtils(), { wrapper });
 
     act(() => {
       result.current.logout();

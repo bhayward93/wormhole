@@ -14,9 +14,9 @@ type SummaryCardHeaderProps = {
 export function SummaryCardHeader({ title, onRefresh }: SummaryCardHeaderProps): JSX.Element {
   return (
     <div className="flex items-center justify-center justify-between mb-4 w-full">
-        <div></div>
-        <h2 className="text-2xl font-bold">{title}</h2>
-        <RefreshCw className="w-4 h-4" onClick={onRefresh} data-testid="summary-card-refresh-icon" />
+      <div></div>
+      <h2 className="text-2xl font-bold">{title}</h2>
+      <RefreshCw className="w-4 h-4" onClick={onRefresh} data-testid="summary-card-refresh-icon" />
     </div>
   );
 }

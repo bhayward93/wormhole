@@ -12,25 +12,25 @@ export type GameStateProviderProps = PropsWithChildren;
  * @returns { JSX.Element } Game state provider.
  */
 export function GameStateProvider({ children }: GameStateProviderProps): JSX.Element {
-    const [ships, setShips] = useState<Ship[]>([]);
-    const [contracts, setContracts] = useState<Contract[]>([]);
-    const [faction, setFaction] = useState<Faction | null>(null);
-    const [agent, setAgent] = useState<Agent | null>(null);
+  const [ships, setShips] = useState<Ship[]>([]);
+  const [contracts, setContracts] = useState<Contract[]>([]);
+  const [faction, setFaction] = useState<Faction | null>(null);
+  const [agent, setAgent] = useState<Agent | null>(null);
 
-    /**
+  /**
      * Init game state.
      * @param { GameState } state - The game state.
      */
-    const initGameState = (state: GameState): void => {
-        setShips(state.ships);
-        setContracts(state.contracts);
-        setFaction(state.faction);
-        setAgent(state.agent);
-    }
+  const initGameState = (state: GameState): void => {
+    setShips(state.ships);
+    setContracts(state.contracts);
+    setFaction(state.faction);
+    setAgent(state.agent);
+  }
 
-    return (
-        <GameStateContext.Provider value={{ships, setShips, contracts, setContracts, faction, setFaction, agent, setAgent, initGameState}}>
-            { children }
-        </GameStateContext.Provider>
-    );
+  return (
+    <GameStateContext.Provider value={{ships, setShips, contracts, setContracts, faction, setFaction, agent, setAgent, initGameState}}>
+      { children }
+    </GameStateContext.Provider>
+  );
 }

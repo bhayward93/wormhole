@@ -32,9 +32,9 @@ export const register = async ({ symbol, faction }: RegisterParams): Promise<Reg
     });
     return resp.data;
   } catch (e: unknown) {
-		if (axios.isAxiosError(e)) {
-			throw new Error(e.response?.data?.error?.message ?? 'An error occurred');
-		}
-		throw new Error('An error occurred');
+    if (axios.isAxiosError(e)) {
+      throw new Error(e.response?.data?.error?.message ?? 'An error occurred');
+    }
+    throw new Error('An error occurred');
   }
 };
