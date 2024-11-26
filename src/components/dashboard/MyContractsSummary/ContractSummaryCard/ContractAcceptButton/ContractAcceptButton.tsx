@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { GameStateContext } from '../../../../../context/game-state/GameStateContext';
 import {
   acceptContract,
-  GetContractResponse,
+  AcceptContractResponse,
 } from '../../../../../services/contracts-service/contracts-service';
 import { Button } from '../../../../ui/button';
 import { LoadingSpinner } from '../../../../common/LoadingSpinner/LoadingSpinner';
@@ -32,7 +32,7 @@ export const ContractAcceptButton: React.FC<ContractAcceptButtonProps> = ({
    */
   const handleAccept = (): void => {
     mutate(contract.id, {
-      onSuccess: (data: GetContractResponse): void => {
+      onSuccess: (data: AcceptContractResponse): void => {
         setContracts(
           contracts.map((c: Contract): Contract => {
             return c.id === contract.id ? data.data.contract : c;
