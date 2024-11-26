@@ -28,16 +28,16 @@ export const getMyContracts = async (): Promise<GetMyContractsResponse> => {
 };
 
 /** The response from the call to get a contract. */
-export type GetContractResponse = { data: { contract: Contract } };
+export type AcceptContractResponse = { data: { contract: Contract } };
 
 /**
  * Call to accept a contract.
  * @param { string } contractId - The contract ID.
- * @returns { Promise<GetContractResponse> }
+ * @returns { Promise<AcceptContractResponse> }
  */
 export const acceptContract = async (
   contractId: string
-): Promise<GetContractResponse> => {
+): Promise<AcceptContractResponse> => {
   try {
     const resp = await axios.post(
       `https://api.spacetraders.io/v2/my/contracts/${contractId}/accept`
