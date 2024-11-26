@@ -1,5 +1,5 @@
 import { it, expect, describe, vi } from "vitest";
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { MyContractsSummary } from './MyContractsSummary';
 import { GameStateContext, GameStateContextType } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
@@ -42,7 +42,7 @@ const mockGameStateContext: GameStateContextType = {
 };
 
 describe('ContractSummaryTable', () => {
-  it('should render the table headers', () => {
+  it('should render the table headers', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <GameStateContext.Provider value={{ ...mockGameStateContext, contracts: [] }}>
@@ -51,7 +51,9 @@ describe('ContractSummaryTable', () => {
       </QueryClientProvider>
     );
 
-    expect(screen.getByText('Your Contracts')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Your Contracts')).toBeInTheDocument();
+    });
   });
 
   it('should render contract data', async () => {
@@ -105,6 +107,8 @@ describe('ContractSummaryTable', () => {
       </QueryClientProvider>
     );
 
-    expect(axios.get).toHaveBeenCalledWith('https://api.spacetraders.io/v2/my/contracts');
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith('https://api.spacetraders.io/v2/my/contracts');
+    });
   });
 });

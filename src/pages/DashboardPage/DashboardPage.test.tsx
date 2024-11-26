@@ -1,5 +1,5 @@
 import { it, expect, describe } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { DashboardPage } from "./DashboardPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -11,7 +11,9 @@ describe("DashboardPage", () => {
       </QueryClientProvider>
     );
 
-    expect(screen.getByText("Your Ships")).toBeInTheDocument();
-    expect(screen.getByText("Your Contracts")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Your Ships")).toBeInTheDocument();
+      expect(screen.getByText("Your Contracts")).toBeInTheDocument();
+    });
   });
 });

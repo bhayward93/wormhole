@@ -13,6 +13,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 vi.mock('axios', () => ({
   default: {
     post: vi.fn(),
+    isAxiosError: vi.fn(() => true),
   },
 }));
 

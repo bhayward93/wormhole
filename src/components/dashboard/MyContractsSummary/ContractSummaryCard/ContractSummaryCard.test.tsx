@@ -2,6 +2,13 @@ import { it, expect, describe } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { ContractSummaryCard } from "./ContractSummaryCard";
 import { Contract } from "../../../../types/game-types";
+import { PropsWithChildren } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+const Wrapper = ({ children }: PropsWithChildren): JSX.Element => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+)
 
 describe("ContractSummaryCard", () => {
   const mockContract: Contract = {
@@ -15,7 +22,7 @@ describe("ContractSummaryCard", () => {
   } as Contract;
 
   it("renders contract details", () => {
-    render(<ContractSummaryCard contract={mockContract} />);
+    render(<Wrapper><ContractSummaryCard contract={mockContract} /></Wrapper>);
 
     expect(screen.getByText("contract1")).toBeInTheDocument();
     expect(screen.getByText("faction1")).toBeInTheDocument();
@@ -28,19 +35,19 @@ describe("ContractSummaryCard", () => {
 
   describe("Accept button", () => {
     it("renders Accept button when contract is not accepted or fulfilled", () => {
-      render(<ContractSummaryCard contract={mockContract} />);
+      render(<Wrapper><ContractSummaryCard contract={mockContract} /></Wrapper>);
       expect(screen.getByText("Accept")).toBeInTheDocument();
     });
 
     it("does not render Accept button when contract is accepted", () => {
       const acceptedContract = { ...mockContract, fulfilled: false, accepted: true };
-      render(<ContractSummaryCard contract={acceptedContract} />);
+      render(<Wrapper><ContractSummaryCard contract={acceptedContract} /></Wrapper>);
       expect(screen.queryByText("Accept")).not.toBeInTheDocument();
     });
 
     it("does not render Accept button when contract is fulfilled", () => {
       const fulfilledContract = { ...mockContract, accepted: false, fulfilled: true };
-      render(<ContractSummaryCard contract={fulfilledContract} />);
+      render(<Wrapper><ContractSummaryCard contract={fulfilledContract} /></Wrapper>);
       expect(screen.queryByText("Accept")).not.toBeInTheDocument();
     });
   });

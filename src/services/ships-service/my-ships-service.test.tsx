@@ -1,10 +1,12 @@
 import { it, expect, describe, vi, MockedFunction } from "vitest";
 import { getMyShips } from "./my-ships-service";
 import axios from "axios";
+import { GameStateContextType } from "../../context/game-state/GameStateContext";
 
 vi.mock('axios', () => ({
   default: {
     get: vi.fn(),
+    isAxiosError: vi.fn(() => true),
   },
 }));
 

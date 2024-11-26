@@ -5,6 +5,7 @@ import axios from "axios";
 vi.mock('axios', () => ({
   default: {
     post: vi.fn(),
+    isAxiosError: vi.fn(() => true),
   },
 }));
 

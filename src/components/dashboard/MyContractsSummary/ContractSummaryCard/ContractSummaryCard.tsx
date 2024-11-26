@@ -1,6 +1,6 @@
 import { Contract } from '../../../../types/game-types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../../../ui/card';
-import { Button } from '../../../ui/button';
+import { ContractAcceptButton } from './ContractAcceptButton/ContractAcceptButton';
 
 /** Contract summary card props. */
 type MyContractsSummaryCardProps = {
@@ -21,7 +21,7 @@ export function ContractSummaryCard({ contract }: MyContractsSummaryCardProps): 
       <CardContent>
         <p><strong>id:</strong> {contract.id}</p>
         <p><strong>factionSymbol:</strong> {contract.factionSymbol}</p>
-        <p><strong>Destination:</strong> {contract.terms.deliver[0].destinationSymbol}</p>
+        <p><strong>Destination:</strong> {contract.terms?.deliver?.[0]?.destinationSymbol}</p>
         <p><strong>Expiration:</strong> {contract.expiration}</p>
         <p><strong>Fulfilled:</strong> {contract.fulfilled ? "Fulfilled" : "Unfulfilled"}</p>
         <p><strong>Accepted:</strong> {contract.accepted ? "Accepted" : "Available"}</p>
@@ -29,7 +29,7 @@ export function ContractSummaryCard({ contract }: MyContractsSummaryCardProps): 
       </CardContent>
       <CardFooter>
         {!contract.accepted && !contract.fulfilled && (
-          <Button>Accept</Button>
+          <ContractAcceptButton contract={contract} />
         )}
       </CardFooter>
     </Card>
