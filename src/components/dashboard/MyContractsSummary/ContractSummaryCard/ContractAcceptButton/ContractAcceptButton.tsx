@@ -21,15 +21,20 @@ type ContractAcceptButtonProps = {
  */
 export const ContractAcceptButton: React.FC<ContractAcceptButtonProps> = ({
   contract,
-}) => {
+}): JSX.Element => {
   const { mutate, isLoading, error } = useMutation(acceptContract);
   const { contracts, setContracts } = useContext(GameStateContext);
 
-  const handleAccept = () => {
+  /**
+   * Handle accepting the contract by calling to mutate and updating
+   * local game state context.
+   * @returns { void }
+   */
+  const handleAccept = (): void => {
     mutate(contract.id, {
-      onSuccess: (data: GetContractResponse) => {
+      onSuccess: (data: GetContractResponse): void => {
         setContracts(
-          contracts.map((c: Contract) => {
+          contracts.map((c: Contract): Contract => {
             return c.id === contract.id ? data.data.contract : c;
           })
         );
