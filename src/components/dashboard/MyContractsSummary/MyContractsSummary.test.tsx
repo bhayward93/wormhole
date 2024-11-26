@@ -1,11 +1,33 @@
-import { it, expect, describe } from "vitest";
+import { it, expect, describe, vi } from "vitest";
 import { act, render, screen } from '@testing-library/react';
 import { MyContractsSummary } from './MyContractsSummary';
-import { GameStateContext } from '../../../context/game-state/GameStateContext';
+import { GameStateContext, GameStateContextType } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
 import { QueryClient, QueryClientProvider } from "react-query";
+import axios from "axios";
 
 const queryClient = new QueryClient();
+
+const mockContracts: Contract[] = [
+  {
+    id: 'contract1',
+    factionSymbol: 'faction1',
+    terms: { deliver: [{ destinationSymbol: 'destination1' }] },
+    expiration: 'expiration1',
+    fulfilled: false,
+    accepted: false,
+    deadlineToAccept: 'deadline1',
+  } as Contract,
+  {
+    id: 'contract2',
+    factionSymbol: 'faction2',
+    terms: { deliver: [{ destinationSymbol: 'destination2' }] },
+    expiration: 'expiration2',
+    fulfilled: true,
+    accepted: true,
+    deadlineToAccept: 'deadline2',
+  } as Contract,
+];
 
 describe('ContractSummaryTable', () => {
   it('should render the table headers', () => {
@@ -21,27 +43,6 @@ describe('ContractSummaryTable', () => {
   });
 
   it('should render contract data', async () => {
-    const mockContracts: Contract[] = [
-      {
-        id: 'contract1',
-        factionSymbol: 'faction1',
-        terms: { deliver: [{ destinationSymbol: 'destination1' }] },
-        expiration: 'expiration1',
-        fulfilled: false,
-        accepted: false,
-        deadlineToAccept: 'deadline1',
-      } as Contract,
-      {
-        id: 'contract2',
-        factionSymbol: 'faction2',
-        terms: { deliver: [{ destinationSymbol: 'destination2' }] },
-        expiration: 'expiration2',
-        fulfilled: true,
-        accepted: true,
-        deadlineToAccept: 'deadline2',
-      } as Contract,
-    ];
-
     render(
       <QueryClientProvider client={queryClient}>
         <GameStateContext.Provider value={{ contracts: mockContracts } as any}>
@@ -77,15 +78,31 @@ describe('ContractSummaryTable', () => {
     expect(screen.getByText('deadline2')).toBeInTheDocument();
   });
 
-  it("renders loading spinner when contracts are being fetched", () => {
+  it("calls to refetch and render data if data is not present", async () => {
+    vi.mock('axios', () => ({
+      default: {
+        get: vi.fn(() => ({ data: { data: null } }))
+      }
+    }));
+    
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ isFetching: true } as any}>
+        <GameStateContext.Provider value={{
+          contracts: [],
+          setContracts: vi.fn(),
+          ships: [],
+          faction: null,
+          agent: null,
+          setShips: vi.fn(),
+          setFaction: vi.fn(),
+          setAgent: vi.fn(),
+          initGameState: vi.fn()
+        }}>
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
     );
 
-    expect(screen.getByTestId("summary-card-refresh-icon")).toBeInTheDocument();
+    expect(axios.get).toHaveBeenCalledWith('https://api.spacetraders.io/v2/my/contracts');
   });
 });

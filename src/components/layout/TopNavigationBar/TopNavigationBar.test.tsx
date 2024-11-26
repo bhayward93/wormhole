@@ -4,19 +4,33 @@ import { BrowserRouter } from 'react-router-dom';
 import { TopNavigationBar } from './TopNavigationBar';
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { AuthContextType } from "../../../types/auth-types";
+import { PropsWithChildren } from "react";
 
-const WrappedTopNavigationBarComponent = ({ isAuthenticated }: { isAuthenticated: boolean }) => (
+const mockLogout = vi.fn();
+
+// Mock the entire module before any test code
+vi.mock('../../../hooks/session-utils/use-session-utils', () => ({
+  useSessionUtils: () => ({
+    logout: mockLogout
+  })
+}));
+
+const Wrapper = ({ isAuthenticated, children }: PropsWithChildren<{ isAuthenticated: boolean }>) => (
   <AuthContext.Provider value={{ isAuthenticated: isAuthenticated } as AuthContextType}>  
     <BrowserRouter>
-      <TopNavigationBar />
+      {children}
     </BrowserRouter>
   </AuthContext.Provider>
 );
 
 describe('TopNavigationBar', () => {
+  beforeEach(() => {
+    mockLogout.mockClear();
+  });
+
   describe('authenticated', () => {
     it('should render the TopNavigationBar component when authenticated', () => {
-      render(<WrappedTopNavigationBarComponent isAuthenticated={true} />);
+      render(<Wrapper isAuthenticated={true}><TopNavigationBar/></Wrapper>);
 
       expect(screen.getByText('Wormhole')).toBeInTheDocument();
       expect(screen.getByText('Dashboard')).toBeInTheDocument();
@@ -29,19 +43,15 @@ describe('TopNavigationBar', () => {
     });
 
     it('should call the logout function when the Logout button is clicked', () => {
-      const logoutFnMock = vi.fn();
-      vi.mock('../../../hooks/session-utils/use-session-utils', () => ({
-        logout: logoutFnMock
-      }));
-      render(<WrappedTopNavigationBarComponent isAuthenticated={true} />);
+      render(<Wrapper isAuthenticated={true}><TopNavigationBar/></Wrapper>);
       fireEvent.click(screen.getByText('Logout'));
-      expect(logoutFnMock).toHaveBeenCalled();
+      expect(mockLogout).toHaveBeenCalled();
     });
   });
 
   describe('unauthenticated', () => {
     it('should render the TopNavigationBar component when unauthenticated', () => {
-      render(<WrappedTopNavigationBarComponent isAuthenticated={false} />);
+      render(<Wrapper isAuthenticated={false}><TopNavigationBar/></Wrapper>);
 
       expect(screen.getByText('Wormhole')).toBeInTheDocument();
       expect(screen.queryByText('Dashboard')).not.toBeInTheDocument();

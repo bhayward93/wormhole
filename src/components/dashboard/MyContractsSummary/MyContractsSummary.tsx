@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../ui/accordion';
@@ -19,12 +19,14 @@ export function MyContractsSummary(): JSX.Element {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data?.data) {
       setContracts(data.data);
+    } else {
+      refetch();
     }
-  }, [data, setContracts]);
+  }, [data, setContracts, refetch]);
 
-  const summaryCardHeader = <SummaryCardHeader title="Your Contracts" onRefresh={refetch} />;
+  const summaryCardHeader = useMemo(() => <SummaryCardHeader title="Your Contracts" onRefresh={refetch} />, [refetch]);
 
   if (error instanceof Error) {
     return (

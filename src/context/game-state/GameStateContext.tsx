@@ -11,7 +11,7 @@ export type GameState = {
 }
 
 /** Game state context type. */
-type GameStateContextType = GameState & {
+export type GameStateContextType = GameState & {
     setShips: (ships: Ship[]) => void;
     setContracts: (contracts: Contract[]) => void;
     setFaction: (faction: Faction | null) => void;
