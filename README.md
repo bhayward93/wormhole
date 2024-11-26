@@ -1,4 +1,10 @@
-# STQS
+# Wormhole - Space Traders Client
+
+Wormhole is an early-stage WIP client for SpaceTraders written in React. Basic functionality build out:
+
+- [x] Registration.
+- [x] My ships list.
+- [x] My contracts list. 
 
 ## Requirements
 
@@ -7,10 +13,11 @@ NPM
 
 ## Running
 
-`npm ci`
+`npm i`
 `npm run dev`
+
 See `package.json` for more details on available scripts.
 
-## Exercise
+## License
 
-Run the project (or read `./src/App.tsx`) for details of the exercise.
+[MIT](https://choosealicense.com/licenses/mit/)
