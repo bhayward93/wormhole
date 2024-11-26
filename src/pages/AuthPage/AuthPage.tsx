@@ -1,5 +1,5 @@
-import { Card } from "../../components/ui/card";
-import { LoginForm } from "../../components/auth/LoginForm/LoginForm";
+import { Card } from '../../components/ui/card';
+import { LoginForm } from '../../components/auth/LoginForm/LoginForm';
 
 /**
  * Auth page component.
@@ -12,5 +12,5 @@ export function AuthPage() {
         <LoginForm data-testid="login-form" />
       </Card>
     </div>
-  )
+  );
 }

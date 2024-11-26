@@ -1,9 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
-import { App } from "./App";
-import { UnauthenticatedOnlyRoute } from "./components/routing/unauthenticated-only-route/unauthenticated-only-route";
-import { AuthPage } from "./pages/AuthPage/AuthPage";
-import { AuthenticatedOnlyRoute } from "./components/routing/autheticated-only-route/authenticated-only-route";
-import { DashboardPage } from "./pages/DashboardPage/DashboardPage";
+import { createBrowserRouter } from 'react-router-dom';
+import { App } from './App';
+import { UnauthenticatedOnlyRoute } from './components/routing/unauthenticated-only-route/unauthenticated-only-route';
+import { AuthPage } from './pages/AuthPage/AuthPage';
+import { AuthenticatedOnlyRoute } from './components/routing/autheticated-only-route/authenticated-only-route';
+import { DashboardPage } from './pages/DashboardPage/DashboardPage';
 
 /**
  * Router for the application.
@@ -11,23 +11,23 @@ import { DashboardPage } from "./pages/DashboardPage/DashboardPage";
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: '',
         element: (
           <UnauthenticatedOnlyRoute>
-            <AuthPage/>
+            <AuthPage />
           </UnauthenticatedOnlyRoute>
-        )
+        ),
       },
       {
         path: 'dashboard',
         element: (
           <AuthenticatedOnlyRoute>
-            <DashboardPage/>
+            <DashboardPage />
           </AuthenticatedOnlyRoute>
-        )
+        ),
       },
       {
         path: 'navigate',
@@ -35,8 +35,8 @@ export const router = createBrowserRouter([
           <AuthenticatedOnlyRoute>
             <div>Todo</div>
           </AuthenticatedOnlyRoute>
-        )
-      }
-    ]
+        ),
+      },
+    ],
   },
-])
+]);

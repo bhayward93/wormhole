@@ -1,6 +1,6 @@
-import { Agent } from "http";
-import { Contract, Faction, Ship } from "../../types/game-types";
-import axios from "axios";
+import { Agent } from 'http';
+import { Contract, Faction, Ship } from '../../types/game-types';
+import axios from 'axios';
 
 /** Register response. */
 export type RegisterResponse = {
@@ -24,9 +24,12 @@ export type RegisterParams = {
  * @param { RegisterParams } params - The register parameters.
  * @returns { Promise<RegisterResponse> } The register response.
  */
-export const register = async ({ symbol, faction }: RegisterParams): Promise<RegisterResponse> => {
+export const register = async ({
+  symbol,
+  faction,
+}: RegisterParams): Promise<RegisterResponse> => {
   try {
-    const resp = await axios.post("https://api.spacetraders.io/v2/register", {
+    const resp = await axios.post('https://api.spacetraders.io/v2/register', {
       symbol: symbol,
       faction: faction,
     });

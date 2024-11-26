@@ -1,23 +1,23 @@
-import { createContext } from "react";
-import { Contract, Faction, Ship } from "../../types/game-types";
-import { Agent } from "http";
+import { createContext } from 'react';
+import { Contract, Faction, Ship } from '../../types/game-types';
+import { Agent } from 'http';
 
 /** Game state. */
 export type GameState = {
-    ships: Ship[];
-    contracts: Contract[];
-    faction: Faction | null;
-    agent: Agent | null;
-}
+  ships: Ship[];
+  contracts: Contract[];
+  faction: Faction | null;
+  agent: Agent | null;
+};
 
 /** Game state context type. */
 export type GameStateContextType = GameState & {
-    setShips: (ships: Ship[]) => void;
-    setContracts: (contracts: Contract[]) => void;
-    setFaction: (faction: Faction | null) => void;
-    setAgent: (agent: Agent | null) => void;
-    initGameState: (state: GameState) => void;
-}
+  setShips: (ships: Ship[]) => void;
+  setContracts: (contracts: Contract[]) => void;
+  setFaction: (faction: Faction | null) => void;
+  setAgent: (agent: Agent | null) => void;
+  initGameState: (state: GameState) => void;
+};
 
 /** Game state context. */
 export const GameStateContext = createContext<GameStateContextType>({

@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { GameStateContext } from "../../context/game-state/GameStateContext";
-import { useQueryClient } from "react-query";
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { GameStateContext } from '../../context/game-state/GameStateContext';
+import { useQueryClient } from 'react-query';
 
 /**
  * Session hook type. */
 type UseSessionReturnType = {
-    logout: () => void;
+  logout: () => void;
 };
 
 /**
@@ -25,11 +25,11 @@ export const useSessionUtils = (): UseSessionReturnType => {
       ships: [],
       contracts: [],
       faction: null,
-      agent: null
+      agent: null,
     });
     setToken(null);
     queryClient.removeQueries();
-    navigate("/");
+    navigate('/');
   };
 
   return { logout };

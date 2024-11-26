@@ -1,6 +1,13 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../../ui/table';
 import { Ship } from '../../../types/game-types';
 import { getMyShips } from '../../../services/ships-service/my-ships-service';
 import { useQuery } from 'react-query';
@@ -13,9 +20,11 @@ import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
  */
 export function MyShipsSummary(): JSX.Element {
   const { ships, setShips } = useContext(GameStateContext);
-  const { data, error, isFetching, refetch } = useQuery('getMyShips', getMyShips, {
-    enabled: false
-  });
+  const { data, error, isFetching, refetch } = useQuery(
+    'getMyShips',
+    getMyShips,
+    { enabled: false }
+  );
 
   useEffect(() => {
     if (data?.data) {
@@ -25,7 +34,10 @@ export function MyShipsSummary(): JSX.Element {
     }
   }, [data, setShips, refetch]);
 
-  const summaryCardHeader = useMemo(() => <SummaryCardHeader title="Your Ships" onRefresh={refetch} />, [refetch]);
+  const summaryCardHeader = useMemo(
+    () => <SummaryCardHeader title="Your Ships" onRefresh={refetch} />,
+    [refetch]
+  );
 
   if (error instanceof Error) {
     return (
@@ -33,7 +45,7 @@ export function MyShipsSummary(): JSX.Element {
         {summaryCardHeader}
         <div className="text-red-500">Error: {error.message}</div>
       </>
-    )
+    );
   }
 
   if (isFetching) {

@@ -1,4 +1,4 @@
-import { FactionNameEnum } from "../../types/faction-enum";
+import { FactionNameEnum } from '../../types/faction-enum';
 
 /**
  * Validate faction name. Will throw an error if the value is not a valid faction.
@@ -7,8 +7,12 @@ import { FactionNameEnum } from "../../types/faction-enum";
  * @returns { boolean } - True if valid.
  */
 export function validateFaction(value: string): boolean {
-  if (!Object.values(FactionNameEnum).includes(value.toUpperCase() as FactionNameEnum)) {
-    throw new Error("Invalid faction");
+  if (
+    !Object.values(FactionNameEnum).includes(
+      value.toUpperCase() as FactionNameEnum
+    )
+  ) {
+    throw new Error('Invalid faction');
   }
   return true;
 }

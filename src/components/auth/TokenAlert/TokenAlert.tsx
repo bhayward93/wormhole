@@ -1,10 +1,18 @@
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../../ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '../../ui/alert-dialog';
 
 /** Token alert props type. */
 type TokenAlertProps = {
-    token: string;
-    onContinue: () => void;
-}
+  token: string;
+  onContinue: () => void;
+};
 
 /**
  * Token alert component. Will show an alert displaying the users token.
@@ -13,7 +21,7 @@ type TokenAlertProps = {
  */
 export function TokenAlert({ token, onContinue }: TokenAlertProps) {
   return (
-    <AlertDialog open={true} >
+    <AlertDialog open={true}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Success!</AlertDialogTitle>
@@ -27,5 +35,5 @@ export function TokenAlert({ token, onContinue }: TokenAlertProps) {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

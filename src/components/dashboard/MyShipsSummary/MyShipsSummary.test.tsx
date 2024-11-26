@@ -1,10 +1,13 @@
-import { it, expect, describe, vi } from "vitest";
+import { it, expect, describe, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MyShipsSummary } from './MyShipsSummary';
-import { GameStateContext, GameStateContextType } from '../../../context/game-state/GameStateContext';
+import {
+  GameStateContext,
+  GameStateContextType,
+} from '../../../context/game-state/GameStateContext';
 import { Ship, ShipNav } from '../../../types/game-types';
-import { QueryClient, QueryClientProvider } from "react-query";
-import axios from "axios";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import axios from 'axios';
 
 const queryClient = new QueryClient();
 
@@ -43,7 +46,9 @@ describe('MyShipsSummary', () => {
   it('should render the table headers', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ...mockGameStateContext, ships: [] }}>
+        <GameStateContext.Provider
+          value={{ ...mockGameStateContext, ships: [] }}
+        >
           <MyShipsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -61,7 +66,9 @@ describe('MyShipsSummary', () => {
   it('should render ship data', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ...mockGameStateContext, ships: mockShips }}>
+        <GameStateContext.Provider
+          value={{ ...mockGameStateContext, ships: mockShips }}
+        >
           <MyShipsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -79,23 +86,27 @@ describe('MyShipsSummary', () => {
     });
   });
 
-  it("calls to refetch and render data if data is not present", async () => {
+  it('calls to refetch and render data if data is not present', async () => {
     vi.mock('axios', () => ({
       default: {
-        get: vi.fn(() => ({ data: { data: null } }))
-      }
+        get: vi.fn(() => ({ data: { data: null } })),
+      },
     }));
 
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ...mockGameStateContext, ships: [] }}>
+        <GameStateContext.Provider
+          value={{ ...mockGameStateContext, ships: [] }}
+        >
           <MyShipsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
     );
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith('https://api.spacetraders.io/v2/my/ships');
+      expect(axios.get).toHaveBeenCalledWith(
+        'https://api.spacetraders.io/v2/my/ships'
+      );
     });
   });
 });

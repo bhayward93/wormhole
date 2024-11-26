@@ -1,16 +1,19 @@
-import { useContext, useState } from "react";
-import { CardContent, CardFooter, CardHeader } from "../../ui/card";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../context/auth/AuthContext";
-import { TextFormGroup } from "../../common/TextFormGroup/TextFormGroup";
-import { validateSymbol } from "../../../helpers/validators/symbol-validator";
-import { validateFaction } from "../../../helpers/validators/faction-validator";
-import { LoadingSpinner } from "../../common/LoadingSpinner/LoadingSpinner";
-import { Button } from "../../ui/button";
-import { TokenAlert } from "../TokenAlert/TokenAlert";
-import { useMutation } from "react-query";
-import { register, RegisterResponse } from "../../../services/registration-service/registration-service";
-import { GameStateContext } from "../../../context/game-state/GameStateContext";
+import { useContext, useState } from 'react';
+import { CardContent, CardFooter, CardHeader } from '../../ui/card';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/auth/AuthContext';
+import { TextFormGroup } from '../../common/TextFormGroup/TextFormGroup';
+import { validateSymbol } from '../../../helpers/validators/symbol-validator';
+import { validateFaction } from '../../../helpers/validators/faction-validator';
+import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
+import { Button } from '../../ui/button';
+import { TokenAlert } from '../TokenAlert/TokenAlert';
+import { useMutation } from 'react-query';
+import {
+  register,
+  RegisterResponse,
+} from '../../../services/registration-service/registration-service';
+import { GameStateContext } from '../../../context/game-state/GameStateContext';
 
 /**
  * Login form component.
@@ -20,9 +23,9 @@ export function LoginForm(): JSX.Element {
   const navigate = useNavigate();
   const { setToken, token } = useContext(AuthContext);
   const { initGameState } = useContext(GameStateContext);
-  const [ formData, setFormData ] = useState({ symbol: "", faction: "COSMIC" });
-  const [ symbolValid, setSymbolValid ] = useState(false);
-  const [ factionValid, setFactionValid ] = useState(true);
+  const [formData, setFormData] = useState({ symbol: '', faction: 'COSMIC' });
+  const [symbolValid, setSymbolValid] = useState(false);
+  const [factionValid, setFactionValid] = useState(true);
   const { mutate, error, isLoading } = useMutation(register);
 
   /**
@@ -30,7 +33,9 @@ export function LoginForm(): JSX.Element {
    * @param { React.FormEvent<HTMLFormElement> } e - The form event.
    * @returns { Promise<void> }
    */
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleFormSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     mutate(
       { symbol: formData.symbol, faction: formData.faction },
@@ -43,7 +48,7 @@ export function LoginForm(): JSX.Element {
             faction: response.data.faction,
             agent: response.data.agent,
           });
-        }
+        },
       }
     );
   };
@@ -75,7 +80,7 @@ export function LoginForm(): JSX.Element {
    * @returns { void }
    */
   const handleTokenAlertContinue = () => {
-    navigate("/dashboard");
+    navigate('/dashboard');
   };
 
   /** Whether the form is valid. */
@@ -106,11 +111,20 @@ export function LoginForm(): JSX.Element {
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <Button type="submit" className="w-full" disabled={!isFormValid} data-testid="register-button">
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!isFormValid}
+            data-testid="register-button"
+          >
             Register
           </Button>
         )}
-        {error instanceof Error && <p className="text-red-500" data-testid="login-form-error-message">{error.message}</p>}
+        {error instanceof Error && (
+          <p className="text-red-500" data-testid="login-form-error-message">
+            {error.message}
+          </p>
+        )}
       </CardFooter>
       {token && (
         <TokenAlert token={token} onContinue={handleTokenAlertContinue} />

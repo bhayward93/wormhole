@@ -1,7 +1,12 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { GameStateContext } from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../ui/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../../ui/accordion';
 import { SummaryCardHeader } from '../SummaryCardHeader/SummaryCardHeader';
 import { useQuery } from 'react-query';
 import { getMyContracts } from '../../../services/contracts-service/contracts-service';
@@ -14,9 +19,13 @@ import { ContractSummaryCard } from './ContractSummaryCard/ContractSummaryCard';
  */
 export function MyContractsSummary(): JSX.Element {
   const { contracts, setContracts } = useContext(GameStateContext);
-  const { data, error, isFetching, refetch } = useQuery('getMyContracts', getMyContracts, {
-    enabled: false
-  });
+  const { data, error, isFetching, refetch } = useQuery(
+    'getMyContracts',
+    getMyContracts,
+    {
+      enabled: false,
+    }
+  );
 
   useEffect(() => {
     if (data?.data) {
@@ -26,7 +35,10 @@ export function MyContractsSummary(): JSX.Element {
     }
   }, [data, setContracts, refetch]);
 
-  const summaryCardHeader = useMemo(() => <SummaryCardHeader title="Your Contracts" onRefresh={refetch} />, [refetch]);
+  const summaryCardHeader = useMemo(
+    () => <SummaryCardHeader title="Your Contracts" onRefresh={refetch} />,
+    [refetch]
+  );
 
   if (error instanceof Error) {
     return (
@@ -34,7 +46,7 @@ export function MyContractsSummary(): JSX.Element {
         {summaryCardHeader}
         <div className="text-red-500">Error: {error.message}</div>
       </>
-    )
+    );
   }
 
   if (isFetching) {
@@ -43,7 +55,7 @@ export function MyContractsSummary(): JSX.Element {
         {summaryCardHeader}
         <LoadingSpinner />
       </>
-    )
+    );
   }
 
   return (
@@ -52,7 +64,11 @@ export function MyContractsSummary(): JSX.Element {
       <Accordion type="single" collapsible className="w-full">
         {contracts?.map((contract: Contract) => (
           <AccordionItem value={contract.id} key={contract.id}>
-            <AccordionTrigger data-testid={`contract-accordion-trigger-${contract.id}`}>{contract.id}</AccordionTrigger>
+            <AccordionTrigger
+              data-testid={`contract-accordion-trigger-${contract.id}`}
+            >
+              {contract.id}
+            </AccordionTrigger>
             <AccordionContent>
               <ContractSummaryCard contract={contract} />
             </AccordionContent>

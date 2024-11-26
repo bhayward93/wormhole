@@ -1,5 +1,5 @@
-import { Contract } from "../../types/game-types";
-import axios from "axios";
+import { Contract } from '../../types/game-types';
+import axios from 'axios';
 
 /** The response from the call to get the agents contracts. */
 export type GetMyContractsResponse = {
@@ -35,9 +35,13 @@ export type GetContractResponse = { data: { contract: Contract } };
  * @param { string } contractId - The contract ID.
  * @returns { Promise<GetContractResponse> }
  */
-export const acceptContract = async (contractId: string): Promise<GetContractResponse> => {
+export const acceptContract = async (
+  contractId: string
+): Promise<GetContractResponse> => {
   try {
-    const resp = await axios.post(`https://api.spacetraders.io/v2/my/contracts/${contractId}/accept`);
+    const resp = await axios.post(
+      `https://api.spacetraders.io/v2/my/contracts/${contractId}/accept`
+    );
     return resp.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {

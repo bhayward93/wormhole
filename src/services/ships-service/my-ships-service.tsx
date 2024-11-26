@@ -1,15 +1,15 @@
-import { Ship } from "../../types/game-types";
-import axios from "axios";
+import { Ship } from '../../types/game-types';
+import axios from 'axios';
 
 /** The response from the call to get the logged in user's ships. */
 export type GetMyShipsResponse = {
-    data: Ship[];
-    meta: {
-      total: number;
-      page: number;
-      limit: number;
-    };
+  data: Ship[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
   };
+};
 
 /**
  * Calls to get the logged in user's ships.
@@ -17,7 +17,7 @@ export type GetMyShipsResponse = {
  */
 export const getMyShips = async (): Promise<GetMyShipsResponse> => {
   try {
-    const resp = await axios.get("https://api.spacetraders.io/v2/my/ships");
+    const resp = await axios.get('https://api.spacetraders.io/v2/my/ships');
     return resp.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {

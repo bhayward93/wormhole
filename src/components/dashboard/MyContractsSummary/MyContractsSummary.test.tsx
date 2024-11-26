@@ -1,10 +1,13 @@
-import { it, expect, describe, vi } from "vitest";
+import { it, expect, describe, vi } from 'vitest';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { MyContractsSummary } from './MyContractsSummary';
-import { GameStateContext, GameStateContextType } from '../../../context/game-state/GameStateContext';
+import {
+  GameStateContext,
+  GameStateContextType,
+} from '../../../context/game-state/GameStateContext';
 import { Contract } from '../../../types/game-types';
-import { QueryClient, QueryClientProvider } from "react-query";
-import axios from "axios";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import axios from 'axios';
 
 const queryClient = new QueryClient();
 
@@ -38,14 +41,16 @@ const mockGameStateContext: GameStateContextType = {
   setShips: vi.fn(),
   setFaction: vi.fn(),
   setAgent: vi.fn(),
-  initGameState: vi.fn()
+  initGameState: vi.fn(),
 };
 
 describe('ContractSummaryTable', () => {
   it('should render the table headers', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ...mockGameStateContext, contracts: [] }}>
+        <GameStateContext.Provider
+          value={{ ...mockGameStateContext, contracts: [] }}
+        >
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -59,7 +64,12 @@ describe('ContractSummaryTable', () => {
   it('should render contract data', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <GameStateContext.Provider value={{ ...mockGameStateContext, contracts: mockContracts }}>
+        <GameStateContext.Provider
+          value={{
+            ...mockGameStateContext,
+            contracts: mockContracts,
+          }}
+        >
           <MyContractsSummary />
         </GameStateContext.Provider>
       </QueryClientProvider>
@@ -92,13 +102,13 @@ describe('ContractSummaryTable', () => {
     expect(screen.getByText('deadline2')).toBeInTheDocument();
   });
 
-  it("calls to refetch and render data if data is not present", async () => {
+  it('calls to refetch and render data if data is not present', async () => {
     vi.mock('axios', () => ({
       default: {
-        get: vi.fn(() => ({ data: { data: null } }))
-      }
+        get: vi.fn(() => ({ data: { data: null } })),
+      },
     }));
-    
+
     render(
       <QueryClientProvider client={queryClient}>
         <GameStateContext.Provider value={mockGameStateContext}>
@@ -108,7 +118,9 @@ describe('ContractSummaryTable', () => {
     );
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith('https://api.spacetraders.io/v2/my/contracts');
+      expect(axios.get).toHaveBeenCalledWith(
+        'https://api.spacetraders.io/v2/my/contracts'
+      );
     });
   });
 });

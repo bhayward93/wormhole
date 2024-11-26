@@ -1,6 +1,6 @@
-import { Card } from "../../components/ui/card";
-import { MyShipsSummary } from "../../components/dashboard/MyShipsSummary/MyShipsSummary";
-import { MyContractsSummary } from "../../components/dashboard/MyContractsSummary/MyContractsSummary";
+import { Card } from '../../components/ui/card';
+import { MyShipsSummary } from '../../components/dashboard/MyShipsSummary/MyShipsSummary';
+import { MyContractsSummary } from '../../components/dashboard/MyContractsSummary/MyContractsSummary';
 
 /**
  * Dashboard page component.
@@ -16,5 +16,5 @@ export function DashboardPage(): JSX.Element {
         <MyContractsSummary />
       </Card>
     </div>
-  )
+  );
 }

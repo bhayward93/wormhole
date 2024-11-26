@@ -1,4 +1,4 @@
-import { it, expect, describe, vi } from "vitest";
+import { it, expect, describe, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { TextFormGroup } from './TextFormGroup';
 
@@ -6,17 +6,35 @@ describe('TextFormGroup', () => {
   it('should render', () => {
     const onChange = vi.fn();
 
-    render(<TextFormGroup label={"label"} name={"name"} value={"value"} onChange={onChange} />);
+    render(
+      <TextFormGroup
+        label={'label'}
+        name={'name'}
+        value={'value'}
+        onChange={onChange}
+      />
+    );
 
-    expect(screen.getByTestId(`text-form-group-label-name`)).toBeInTheDocument();
-    expect(screen.getByTestId(`text-form-group-input-name`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`text-form-group-label-name`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`text-form-group-input-name`)
+    ).toBeInTheDocument();
   });
 
   it('should call onChange', () => {
-    const newValue = "newValue";
+    const newValue = 'newValue';
     const onChange = vi.fn();
 
-    render(<TextFormGroup label={"label"} name={"name"} value={"value"} onChange={onChange} />);
+    render(
+      <TextFormGroup
+        label={'label'}
+        name={'name'}
+        value={'value'}
+        onChange={onChange}
+      />
+    );
 
     const input = screen.getByTestId(`text-form-group-input-name`);
     fireEvent.change(input, { target: { value: newValue } });
@@ -26,13 +44,25 @@ describe('TextFormGroup', () => {
 
   it('should display validation errors', () => {
     const onChange = vi.fn();
-    const validateFn = vi.fn(() => { throw new Error("Invalid value"); });
+    const validateFn = vi.fn(() => {
+      throw new Error('Invalid value');
+    });
 
-    render(<TextFormGroup label={"label"} name={"name"} value={"value"} onChange={onChange} validateFn={validateFn} />);
+    render(
+      <TextFormGroup
+        label={'label'}
+        name={'name'}
+        value={'value'}
+        onChange={onChange}
+        validateFn={validateFn}
+      />
+    );
 
     const input = screen.getByTestId(`text-form-group-input-name`);
-    fireEvent.change(input, { target: { value: "invalidValue" } });
+    fireEvent.change(input, { target: { value: 'invalidValue' } });
 
-    expect(screen.getByTestId(`text-form-group-error-name`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`text-form-group-error-name`)
+    ).toBeInTheDocument();
   });
 });
