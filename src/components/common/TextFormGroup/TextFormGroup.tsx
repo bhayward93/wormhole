@@ -39,9 +39,9 @@ export function TextFormGroup({
     try {
       validateFn?.(newValue);
       setValidationError('');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setValidationError(error.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setValidationError(e.message);
       } else {
         setValidationError('Invalid value');
       }

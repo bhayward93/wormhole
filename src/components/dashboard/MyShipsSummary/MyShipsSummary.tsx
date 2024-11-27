@@ -28,8 +28,8 @@ export function MyShipsSummary(): JSX.Element {
     onSuccess: (data: GetMyShipsResponse): void => {
       setShips(data.data);
     },
-    onError: (error: Error): void => {
-      console.error(error);
+    onError: (e: Error): void => {
+      console.error(e);
     },
   });
 

@@ -30,8 +30,8 @@ export function MyContractsSummary(): JSX.Element {
       onSuccess: (data: GetMyContractsResponse): void => {
         setContracts(data.data);
       },
-      onError: (error: Error): void => {
-        console.error(error);
+      onError: (e: Error): void => {
+        console.error(e);
       },
     }
   );
