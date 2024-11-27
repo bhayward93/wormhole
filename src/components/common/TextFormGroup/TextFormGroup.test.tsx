@@ -8,6 +8,7 @@ describe('TextFormGroup', () => {
 
     render(
       <TextFormGroup
+        id={'id'}
         label={'label'}
         name={'name'}
         value={'value'}
@@ -29,6 +30,7 @@ describe('TextFormGroup', () => {
 
     render(
       <TextFormGroup
+        id={'id'}
         label={'label'}
         name={'name'}
         value={'value'}
@@ -50,6 +52,7 @@ describe('TextFormGroup', () => {
 
     render(
       <TextFormGroup
+        id={'id'}
         label={'label'}
         name={'name'}
         value={'value'}
