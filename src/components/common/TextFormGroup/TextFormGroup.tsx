@@ -6,6 +6,7 @@ import { Label } from '../../ui/label';
 type FormGroupProps = {
   label: string;
   name: string;
+  id: string;
   value: string;
   onChange: (value: string, isValid: boolean) => void;
   validateFn?: (value: string) => boolean;
@@ -19,6 +20,7 @@ type FormGroupProps = {
 export function TextFormGroup({
   label,
   name,
+  id,
   value,
   onChange,
   validateFn,
@@ -51,19 +53,23 @@ export function TextFormGroup({
 
   return (
     <div className="flex flex-col gap-2">
-      <Label htmlFor={name} data-testid={`text-form-group-label-${name}`}>
+      <Label htmlFor={id} data-testid={`text-form-group-label-${name}`}>
         {label}
       </Label>
       <Input
         type="text"
         name={name}
+        id={id}
         value={value}
         onChange={handleChange}
+        aria-invalid={Boolean(validationError)}
+        aria-describedby={validationError ? `${id}-error` : undefined}
         data-testid={`text-form-group-input-${name}`}
       />
-      <div className="min-h-6">
+      <div className="min-h-6" role="alert" aria-live="assertive">
         {validationError && (
           <p
+            id={`${id}-error`}
             className="text-red-500"
             data-testid={`text-form-group-error-${name}`}
           >

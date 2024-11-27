@@ -34,7 +34,9 @@ export function TokenAlert({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={onContinue} autoFocus={true}>
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

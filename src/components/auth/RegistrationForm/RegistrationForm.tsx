@@ -95,6 +95,7 @@ export function RegistrationForm(): JSX.Element {
         <TextFormGroup
           label="Symbol"
           name="symbol"
+          id="symbol"
           value={formData.symbol}
           onChange={handleSymbolChange}
           validateFn={validateSymbol}
@@ -102,6 +103,7 @@ export function RegistrationForm(): JSX.Element {
         <TextFormGroup
           label="Faction"
           name="faction"
+          id="faction"
           value={formData.faction}
           onChange={handleFactionChange}
           validateFn={validateFaction}
@@ -124,6 +126,8 @@ export function RegistrationForm(): JSX.Element {
           <p
             className="text-red-500"
             data-testid="registration-form-error-message"
+            aria-label={`Error: ${error.message}`}
+            role="alert"
           >
             {error.message}
           </p>

@@ -21,6 +21,7 @@ export function LoadingSpinner({
       size={size}
       className={cn('animate-spin text-primary', className)}
       data-testid="loading-spinner"
+      aria-label="loading spinner"
     />
   );
 }

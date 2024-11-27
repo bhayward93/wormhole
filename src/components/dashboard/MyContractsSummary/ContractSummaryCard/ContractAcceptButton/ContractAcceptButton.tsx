@@ -43,12 +43,18 @@ export const ContractAcceptButton: React.FC<ContractAcceptButtonProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <Button onClick={handleAccept} disabled={isLoading}>
-        {isLoading ? <LoadingSpinner className="text-white" /> : 'Accept'}
-      </Button>
+    <div className="flex flex-col gap-2 w-full">
+      {isLoading ? (
+        <LoadingSpinner className="text-white" />
+      ) : (
+        <Button onClick={handleAccept} disabled={isLoading}>
+          Accept
+        </Button>
+      )}
       {error instanceof Error && (
-        <div className="text-red-500">Error: {error.message}</div>
+        <p className="text-red-500" role="alert">
+          Error: {error.message}
+        </p>
       )}
     </div>
   );

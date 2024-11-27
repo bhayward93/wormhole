@@ -23,6 +23,9 @@ export function SummaryCardHeader({
         className="w-4 h-4 cursor-pointer hover:opacity-70"
         onClick={onRefresh}
         data-testid="summary-card-refresh-icon"
+        tabIndex={0}
+        aria-label={`Refresh ${title} `}
+        aria-role="button"
       />
     </div>
   );

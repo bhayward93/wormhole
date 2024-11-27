@@ -35,9 +35,25 @@ export function TopNavigationBar(): JSX.Element {
             </NavLink>
           </li>
           <li>
-            <span onClick={logout} className="cursor-pointer hover:underline">
+            <a
+              href="#"
+              role="button"
+              tabIndex={0}
+              aria-label="logout"
+              onClick={(e) => {
+                e.preventDefault();
+                logout();
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  logout();
+                }
+              }}
+              className="cursor-pointer hover:underline"
+            >
               Logout
-            </span>
+            </a>
           </li>
         </ul>
       )}
