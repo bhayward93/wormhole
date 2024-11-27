@@ -25,7 +25,7 @@ export function SummaryCardHeader({
         data-testid="summary-card-refresh-icon"
         tabIndex={0}
         aria-label={`Refresh ${title} `}
-        aria-role="button"
+        role="button"
       />
     </div>
   );
